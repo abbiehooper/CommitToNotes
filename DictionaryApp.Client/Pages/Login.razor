@@ -1,0 +1,26 @@
+﻿@page "/login"
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<h3>Log in</h3>
+<input @bind="email" placeholder="Email" />
+<input @bind="password" type="password" placeholder="Password" />
+<button @onclick="Submit">Log in</button>
+@if (error is not null)
+{
+    <p style="color:red">@error</p>
+}
+
+@code {
+    string email = "", password = "";
+    string? error;
+
+    async Task Submit()
+    {
+        error = null;
+        if (await Auth.LoginAsync(email, password))
+            Nav.NavigateTo("/");
+        else
+            error = "Invalid credentials.";
+    }
+}
