@@ -1,9 +1,7 @@
 ﻿namespace DictionaryApp.Shared;
 
-public record TeamDto(int Id, string Name);
-public record DictionaryEntryDto(int Id, int TeamId, string Key, string Value);
-public record CreateTeamRequest(string Name);
-public record CreateEntryRequest(int TeamId, string Key, string Value);
+public record DictionaryEntryDto(int Id, string Key, string Value);
+public record CreateEntryRequest(string Key, string Value);
 public record UpdateEntryRequest(string Key, string Value);
 
 public record RegisterRequest(string Email, string Password);

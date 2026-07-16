@@ -5,13 +5,12 @@ namespace DictionaryApp.Server.Data;
 
 public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<ApplicationUser>(options)
 {
-    public DbSet<Team> Teams => Set<Team>();
     public DbSet<DictionaryEntry> DictionaryEntries => Set<DictionaryEntry>();
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder b)
     {
-        base.OnModelCreating(builder);
-        builder.Entity<DictionaryEntry>()
-            .HasIndex(e => new { e.TeamId, e.Key }).IsUnique();
+        base.OnModelCreating(b);
+        b.Entity<DictionaryEntry>()
+            .HasIndex(e => new { e.UserId, e.Key }).IsUnique();
     }
 }

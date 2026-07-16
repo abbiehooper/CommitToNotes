@@ -104,58 +104,58 @@ auth.MapGet("/me", (ClaimsPrincipal user) =>
     Results.Ok(new UserInfo(user.Identity!.Name ?? "")))
     .RequireAuthorization();
 
-// ---------- Team + dictionary endpoints ----------
-var teams = app.MapGroup("/teams").RequireAuthorization();
+// ---------- Dictionary endpoints ----------
+var entries = app.MapGroup("/entries").RequireAuthorization();
 
-teams.MapGet("/", async (AppDbContext db) =>
-    await db.Teams.Select(t => new TeamDto(t.Id, t.Name)).ToListAsync());
-
-teams.MapPost("/", async (CreateTeamRequest req, AppDbContext db) =>
+entries.MapGet("/", async (ClaimsPrincipal user, AppDbContext db) =>
 {
-    var team = new Team { Name = req.Name };
-    db.Teams.Add(team);
-    await db.SaveChangesAsync();
-    return Results.Created($"/teams/{team.Id}", new TeamDto(team.Id, team.Name));
+    var userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
+    return await db.DictionaryEntries
+        .Where(e => e.UserId == userId)
+        .Select(e => new DictionaryEntryDto(e.Id, e.Key, e.Value))
+        .ToListAsync();
 });
 
-teams.MapGet("/{teamId:int}/entries", async (int teamId, AppDbContext db) =>
-    await db.DictionaryEntries
-        .Where(e => e.TeamId == teamId)
-        .Select(e => new DictionaryEntryDto(e.Id, e.TeamId, e.Key, e.Value))
-        .ToListAsync());
-
-teams.MapPost("/{teamId:int}/entries",
-    async (int teamId, CreateEntryRequest req, AppDbContext db) =>
+entries.MapPost("/", async (
+    CreateEntryRequest req, ClaimsPrincipal user, AppDbContext db) =>
+{
+    var userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
+    var entry = new DictionaryEntry
     {
-        var entry = new DictionaryEntry { TeamId = teamId, Key = req.Key, Value = req.Value };
-        db.DictionaryEntries.Add(entry);
-        await db.SaveChangesAsync();
-        return Results.Created(
-            $"/teams/{teamId}/entries/{entry.Id}",
-            new DictionaryEntryDto(entry.Id, entry.TeamId, entry.Key, entry.Value));
-    });
+        UserId = userId,
+        Key = req.Key,
+        Value = req.Value
+    };
+    db.DictionaryEntries.Add(entry);
+    await db.SaveChangesAsync();
+    return Results.Created($"/entries/{entry.Id}",
+        new DictionaryEntryDto(entry.Id, entry.Key, entry.Value));
+});
 
-teams.MapPut("/{teamId:int}/entries/{id:int}",
-    async (int teamId, int id, UpdateEntryRequest req, AppDbContext db) =>
-    {
-        var entry = await db.DictionaryEntries
-            .FirstOrDefaultAsync(e => e.Id == id && e.TeamId == teamId);
-        if (entry is null) return Results.NotFound();
-        entry.Key = req.Key;
-        entry.Value = req.Value;
-        await db.SaveChangesAsync();
-        return Results.NoContent();
-    });
+entries.MapPut("/{id:int}", async (
+    int id, UpdateEntryRequest req, ClaimsPrincipal user, AppDbContext db) =>
+{
+    var userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
+    var entry = await db.DictionaryEntries
+        .FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+    if (entry is null) return Results.NotFound();
+    entry.Key = req.Key;
+    entry.Value = req.Value;
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
 
-teams.MapDelete("/{teamId:int}/entries/{id:int}",
-    async (int teamId, int id, AppDbContext db) =>
-    {
-        var entry = await db.DictionaryEntries
-            .FirstOrDefaultAsync(e => e.Id == id && e.TeamId == teamId);
-        if (entry is null) return Results.NotFound();
-        db.DictionaryEntries.Remove(entry);
-        await db.SaveChangesAsync();
-        return Results.NoContent();
-    });
+entries.MapDelete("/{id:int}", async (
+    int id, ClaimsPrincipal user, AppDbContext db) =>
+{
+    var userId = user.FindFirstValue(ClaimTypes.NameIdentifier)!;
+    var entry = await db.DictionaryEntries
+        .FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+    if (entry is null) return Results.NotFound();
+    db.DictionaryEntries.Remove(entry);
+    await db.SaveChangesAsync();
+    return Results.NoContent();
+});
+
 
 app.Run();
