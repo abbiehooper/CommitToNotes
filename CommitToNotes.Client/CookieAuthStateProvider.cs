@@ -1,9 +1,9 @@
-﻿using DictionaryApp.Shared;
+﻿using CommitToNotes.Shared;
 using Microsoft.AspNetCore.Components.Authorization;
 using System.Net.Http.Json;
 using System.Security.Claims;
 
-namespace DictionaryApp.Client;
+namespace CommitToNotes.Client;
 
 public class CookieAuthStateProvider(HttpClient http) : AuthenticationStateProvider
 {

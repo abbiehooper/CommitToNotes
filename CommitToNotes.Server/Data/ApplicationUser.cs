@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace DictionaryApp.Server.Data;
+namespace CommitToNotes.Server.Data;
 
 public class ApplicationUser : IdentityUser { }

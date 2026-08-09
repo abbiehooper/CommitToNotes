@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
-namespace DictionaryApp.Client;
+namespace CommitToNotes.Client;
 
 public class CredentialsHandler : DelegatingHandler
 {

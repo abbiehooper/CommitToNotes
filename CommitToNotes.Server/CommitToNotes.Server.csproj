@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DictionaryApp.Shared\DictionaryApp.Shared.csproj" />
+    <ProjectReference Include="..\CommitToNotes.Shared\CommitToNotes.Shared.csproj" />
   </ItemGroup>
 
 </Project>

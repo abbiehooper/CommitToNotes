@@ -1,4 +1,4 @@
-﻿namespace DictionaryApp.Server.Data;
+﻿namespace CommitToNotes.Server.Data;
 
 public class DictionaryEntry
 {

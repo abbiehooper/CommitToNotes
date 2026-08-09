@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CommitToNotes.Client/CommitToNotes.Client.csproj" />
+  <Project Path="CommitToNotes.Server/CommitToNotes.Server.csproj" />
+  <Project Path="CommitToNotes.Shared/CommitToNotes.Shared.csproj" />
+</Solution>

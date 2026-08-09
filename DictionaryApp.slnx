@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="DictionaryApp.Client/DictionaryApp.Client.csproj" />
-  <Project Path="DictionaryApp.Server/DictionaryApp.Server.csproj" />
-  <Project Path="DictionaryApp.Shared/DictionaryApp.Shared.csproj" />
-</Solution>

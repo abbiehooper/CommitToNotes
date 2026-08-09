@@ -1,5 +1,5 @@
-using DictionaryApp.Server.Data;
-using DictionaryApp.Shared;
+using CommitToNotes.Server.Data;
+using CommitToNotes.Shared;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -30,7 +30,7 @@ builder.Services.ConfigureApplicationCookie(o =>
     o.Cookie.HttpOnly = true;
     o.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     o.Cookie.SameSite = SameSiteMode.Strict;
-    o.Cookie.Name = "DictionaryApp.Auth";
+    o.Cookie.Name = "CommitToNotes.Auth";
     o.ExpireTimeSpan = TimeSpan.FromHours(8);
     o.SlidingExpiration = true;
     o.Events.OnRedirectToLogin = ctx =>

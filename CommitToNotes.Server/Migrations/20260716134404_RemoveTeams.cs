@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace DictionaryApp.Server.Migrations
+namespace CommitToNotes.Server.Migrations
 {
     /// <inheritdoc />
     public partial class RemoveTeams : Migration

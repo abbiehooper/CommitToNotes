@@ -1,7 +1,7 @@
-﻿using DictionaryApp.Shared;
+﻿using CommitToNotes.Shared;
 using System.Net.Http.Json;
 
-namespace DictionaryApp.Client;
+namespace CommitToNotes.Client;
 
 public class AuthService(HttpClient http, CookieAuthStateProvider state)
 {

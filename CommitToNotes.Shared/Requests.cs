@@ -1,4 +1,4 @@
-﻿namespace DictionaryApp.Shared;
+﻿namespace CommitToNotes.Shared;
 
 public record DictionaryEntryDto(int Id, string Key, string Value);
 public record CreateEntryRequest(string Key, string Value);
