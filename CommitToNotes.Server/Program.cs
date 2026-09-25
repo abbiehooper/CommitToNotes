@@ -65,6 +65,7 @@ using (var scope = app.Services.CreateScope())
     await db.Database.MigrateAsync();
 }
 
+app.MapStaticAssets();
 app.UseHttpsRedirection();
 app.UseCors(ClientCors);
 app.UseAuthentication();
