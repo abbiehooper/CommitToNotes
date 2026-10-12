@@ -1,6 +1,17 @@
-﻿<div>
-  
-   @* Project Description test again again *@
-
-</div>
+﻿<MudPaper Class="purple-container">
+    <MudText Typo="Typo.h4" Class="simple-logo">Commit To Notes</MudText>
+    <div class="description">
+        <MudText Typo="Typo.h2">
+            Notes that live where you work.
+        </MudText>
+        <MudCard Class="description-card">
+            <MudCardContent>
+                <MudText Class="description-card-heading" Typo="Typo.body1"> TOTAL NOTES CREATED TO DATE: </MudText>
+                <MudText Class="description-card-query" Typo="Typo.body1">SELECT COUNT(*) FROM Notes;</MudText>
+                <MudText Class="description-card-notes-number" Typo="Typo.body1">123456789 </MudText>
+            </MudCardContent>
+        </MudCard>
+    </div>
+    <MudText Class="version" Typo="Typo.body1">Version 1.0.0. Status: in development for now </MudText>
+</MudPaper>
 
