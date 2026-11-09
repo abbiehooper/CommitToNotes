@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @* Required *@
-<MudThemeProvider />
+<MudThemeProvider Theme="@MyCustomTheme" />
 <MudPopoverProvider />
 
 @* Needed for dialogs *@
@@ -9,18 +9,32 @@
 @* Needed for snackbars *@
 <MudSnackbarProvider />
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+@Body
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+@code {
+    private static readonly string[] HeadingFontFamily = ["Space Grotesk", "sans-serif"];
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+    private readonly MudTheme MyCustomTheme = new MudTheme()
+    {
+        Typography = new Typography()
+        {
+            H1 = new H1Typography { FontFamily = HeadingFontFamily },
+
+            H2 = new H2Typography
+            {
+                FontFamily = HeadingFontFamily,
+                FontWeight = "600",
+                LineHeight = "58.2px",
+                LetterSpacing = "-1.68px"
+            },
+
+            H3 = new H3Typography { FontFamily = HeadingFontFamily },
+
+            H4 = new H4Typography { FontFamily = HeadingFontFamily },
+
+            H5 = new H5Typography { FontFamily = HeadingFontFamily },
+
+            H6 = new H6Typography { FontFamily = HeadingFontFamily }
+        }
+    };
+}

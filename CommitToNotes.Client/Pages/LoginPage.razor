@@ -1,6 +1,9 @@
 ﻿@page "/login"
+@using CommitToNotes.Client.Shared
 @inject AuthService Auth
 @inject NavigationManager Nav
+
+<ProjectDescription />
 
 <h3>Log in</h3>
 <input @bind="email" placeholder="Email" />
