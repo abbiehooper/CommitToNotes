@@ -1,6 +1,5 @@
 * {
     --space-grotesk-font: 'Space Grotesk', sans-serif;
-
 }
 
 
@@ -41,11 +40,21 @@
 
 .purple-container {
     height: 100vh;
-    background-color: var(--mud-palette-primary-lighten)!important;
-    color: white!important;
+    background-color: var(--mud-palette-primary-lighten) !important;
+    color: white !important;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
+.description-card-heading {
+    font-weight: 600;
+}
+
+.description-card-query{
+    opacity:0.5;
+}
 .simple-logo {
     font-family: var(--space-grotesk-font);
 }
